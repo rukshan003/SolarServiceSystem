@@ -72,9 +72,8 @@ const deleteJob = async (req, res) => {
 //   res.status(200).json(job);
 // };
 
-
 const updateJob = async (req, res) => {
-  const  id  = req.params['id'];
+  const id = req.params["id"];
 
   // if (!mongoose.Types.ObjectId.isValid(id)) {
   //     return res.status(404).json({error: 'No such package'})
@@ -90,18 +89,38 @@ const updateJob = async (req, res) => {
 
   // res.status(200).json(package);
 
-
   try {
-    const {jobID , Capacity, AverageUnits, NoOfpanels , Description } = req.body;
-    const updatedData = await Job.findByIdAndUpdate(id , {jobID , Capacity, AverageUnits, NoOfpanels , Description});
+    console.log("Done");
+    // const { jobID, Capacity, AverageUnits, NoOfpanels, Description } = req.body;
+    // console.log(Description);
+
+    const data = {
+      jobID: req.body.jobID,
+      Capacity: req.body.Capacity,
+      AverageUnits: req.body.AverageUnits,
+      NoOfpanels: req.body.NoOfpanels,
+      Description: req.body.Description,
+    };
+
+    const updatedJob = await Job.findByIdAndUpdate(id, {
+      // jobID,
+      // Capacity,
+      // AverageUnits,
+      // NoOfpanels,
+      // Description,
+      data,
+    });
+    if (updatedJob) {
+      console.log("Update Success");
+    } else {
+      console.log("Error !!");
+    }
     const getUpdateData = await Job.findById(id);
     res.json(getUpdateData);
-
-  }catch(err){
-
+  } catch (err) {
     res.status(400).send({ err: err.message });
   }
-}
+};
 
 module.exports = {
   getJobs,
