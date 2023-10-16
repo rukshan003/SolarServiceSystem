@@ -1,8 +1,10 @@
+import { Link, useNavigate } from "react-router-dom";
 import { useJobsContext } from "../hooks/useJobsContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const JobDetails = ({ job }) => {
   const { dispatch } = useJobsContext();
+  const navigate = useNavigate();
   const handleClick = async () => {
     const response = await fetch("/api/jobs/" + job._id, {
       method: "DELETE",
@@ -11,6 +13,10 @@ const JobDetails = ({ job }) => {
     if (response.ok) {
       dispatch({ type: "DELETE_JOB", payload: json });
     }
+  };
+
+  const navigateToEdit = () => {
+    navigate("edit");
   };
 
   return (
@@ -34,8 +40,9 @@ const JobDetails = ({ job }) => {
         {job.Description}
       </p>
       <p>{formatDistanceToNow(new Date(job.createdAt), { addSuffix: true })}</p>
-      <button >
-        Edit details
+      <button>
+        {" "}
+        <Link to={`/edit/${job._id}`}>Edit details</Link>{" "}
       </button>
       <span className="material-symbols-outlined" onClick={handleClick}>
         {" "}

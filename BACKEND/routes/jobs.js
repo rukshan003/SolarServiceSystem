@@ -8,7 +8,7 @@ const {
   deleteJob,
   updateJob,
 } = require("../controllers/jobController");
-
+console.log("hi");
 //Get all jobs
 router.get("/", getJobs);
 
@@ -24,5 +24,5 @@ router.delete("/:id", deleteJob);
 //update jobs
 // router.patch("/:id", updateJob);
 
-router.put('/update/:id' , updateJob);
+router.put("/:id", updateJob);
 module.exports = router;
