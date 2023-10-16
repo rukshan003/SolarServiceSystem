@@ -34,6 +34,9 @@ const JobDetails = ({ job }) => {
         {job.Description}
       </p>
       <p>{formatDistanceToNow(new Date(job.createdAt), { addSuffix: true })}</p>
+      <button >
+        Edit details
+      </button>
       <span className="material-symbols-outlined" onClick={handleClick}>
         {" "}
         delete{" "}

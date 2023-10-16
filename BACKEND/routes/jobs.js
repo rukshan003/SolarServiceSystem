@@ -22,6 +22,7 @@ router.post("/", createJob);
 router.delete("/:id", deleteJob);
 
 //update jobs
-router.patch("/:id", updateJob);
+// router.patch("/:id", updateJob);
 
+router.put('/update/:id' , updateJob);
 module.exports = router;
